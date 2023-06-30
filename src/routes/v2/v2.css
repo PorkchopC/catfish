@@ -1,0 +1,43 @@
+.pond {
+    @apply grid grid-cols-2 auto-cols-fr gap-3 justify-center outline-blue-700 outline-dashed outline-offset-8 rounded-full px-6 py-6;
+}
+
+.keepNet {
+    @apply grid grid-cols-2 auto-cols-fr gap-3 justify-center outline-black outline-dashed outline-offset-8 rounded-md px-6 py-6;
+}
+
+.fish {
+    @apply text-center border-2 border-black px-3 cursor-pointer rounded-lg hover:bg-sky-300 hover:animate-wiggle hover:animate-infinite focus:outline-offset-4 focus:outline focus:outline-cyan-500 focus:bg-sky-300;
+}
+
+.lineCard {
+    @apply flex h-60 w-40 justify-center align-top rounded-md bg-gray-300 absolute blackBorder animate-fade-up animate-duration-200;
+}
+
+.title {
+    @apply flex justify-center text-center font-bold mb-2;
+}
+
+.tensionCol {
+    @apply flex flex-col grow items-center px-1 py-1 rounded-md bg-gray-300 gap-1;
+}
+
+.tensionBlock {
+    @apply flex grow items-center justify-center rounded-md px-6;
+}
+
+.blackBorder {
+    @apply border border-black;
+}
+
+.button {
+    @apply border-2 border-black px-1 disabled rounded-md bg-sky-300;
+}
+
+.selected {
+    @apply bg-sky-300 outline outline-offset-4 outline-cyan-500 cursor-default animate-pulse;
+}
+
+.disabled {
+    @apply disabled:bg-gray-300 disabled:cursor-not-allowed disabled:opacity-40;
+}
