@@ -1,13 +1,16 @@
 <script lang="ts">
-    import { shopCards } from "../../models/deck/Cards";
+    import { buyCard, shopCards } from "../../models/deck/Cards";
+    import type { Deck } from "../../models/deck/Deck";
     import type { Resources } from "../../models/items/resources";
     import LineCard from "../LineCard.svelte";
+    import RodIcon from "../icons/RodIcon.svelte";
 
-    export { resources, open };
+    export { resources, deck, open };
 
-    let showModal: boolean = false,
+    let showModal: boolean = true,
         dialog: HTMLDialogElement,
-        resources: Resources;
+        resources: Resources,
+        deck: Deck;
 
     const open = (show: boolean) => {
         showModal = show;
@@ -28,7 +31,9 @@
     <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation>
         <slot>
-            <div class="flex justify-center"><h1>Shop</h1></div>
+            <div class="flex justify-center">
+                <h1>Shop</h1>
+            </div>
             <div class="resourceWrapper">
                 <div class="resourceBox">
                     <div class="grid grid-cols-2">
@@ -53,25 +58,42 @@
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-4 grow mt-20">
-                <div class="col-span-3 flex flex-col">
+
+            <div class="grid grid-cols-2 mt-20 gap-4">
+                <div class="flex flex-col">
                     <p class="text-center">Line Cards</p>
                     <div class="flex flex-row gap-3">
                         {#each shopCards as card}
-                            <div class="flex flex-col items-center">
+                            <div
+                                class="flex flex-col items-center hover:cursor-pointer"
+                                on:click={() => buyCard(card, resources, deck)}
+                            >
                                 <LineCard {card} />
-                                <div>
-                                    <div class="costIcon bg-blue-500">
-                                        {card.cost}
-                                    </div>
+                                <div class="costIcon bg-blue-500">
+                                    {card.cost}
                                 </div>
                             </div>
                         {/each}
                     </div>
                 </div>
-                <div class="flex flex-col">
+                <div class="flex flex-col ml-8">
                     <p class="text-center">Equipment</p>
-                    <div />
+                    <div
+                        class="flex flex-col border-2 border-black rounded-md divide-y-2 divide-dashed divide-gray-400"
+                    >
+                        <div class="flex flex-row items-center rounded-md py-1">
+                            <div class="flex px-1">
+                                <RodIcon />
+                                <p class="font-bold">: 5</p>
+                            </div>
+                            <p class="text-center">Good Rod</p>
+                        </div>
+                        <div>
+                            <p class="text-center">
+                                A more recent model of rod
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex flex-col">
                     <p class="text-center">Services</p>
@@ -83,7 +105,7 @@
 
 <style lang="postcss">
     .modal {
-        @apply flex justify-center w-3/4 h-3/4 rounded-md;
+        @apply flex justify-center w-4/5 h-4/5 rounded-md;
     }
 
     .resourceWrapper {

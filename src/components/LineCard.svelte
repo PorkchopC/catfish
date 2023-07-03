@@ -3,10 +3,11 @@
 
     export { card, scale };
 
-    let card: Card, scale: number | undefined;
+    let card: Card,
+        scale: number = 100;
 </script>
 
-<div class="lineCard {scale ? `scale-${scale}` : ''}">
+<div class="lineCard scale-{scale}">
     <div class="resourceGrid">
         <div class="resourceIcon bg-black">
             {card?.tension}

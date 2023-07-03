@@ -1,5 +1,5 @@
 export type { Card }
-export { shopCards }
+export { shopCards, buyCard }
 
 type Card = {
     id: number,
@@ -9,6 +9,13 @@ type Card = {
     bait?: number,
     coins?: number,
     cost?: number
+}
+
+const buyCard = (card, resources, deck) => {
+    if(resources.safe.coins >= card.cost) {
+        console.log("test")
+        return deck.cards.unshift(card), shopCards = shopCards.filter(lineCard => lineCard.id !== card.id), resources.safe.coins -= card.cost;
+    }
 }
 
 let shopCards: Card[] = [

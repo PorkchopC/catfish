@@ -106,7 +106,7 @@
         : (round.phase = Phases.Prep);
 </script>
 
-<ShopModal bind:this={shopModal} {resources} />
+<ShopModal bind:this={shopModal} {resources} {deck} />
 <RulesDrawer />
 
 <div class="flex flex-col items-center">
