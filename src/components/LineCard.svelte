@@ -37,7 +37,7 @@
 
 <style lang="postcss">
     .lineCard {
-        @apply flex h-60 w-40 transition justify-center align-top rounded-md bg-gray-300 border border-black hover:bg-gray-400 duration-300;
+        @apply flex h-60 w-40 transition justify-center align-top rounded-md bg-gray-300 border border-black hover:bg-gray-400 duration-300 hover:cursor-pointer;
     }
 
     .resourceGrid {

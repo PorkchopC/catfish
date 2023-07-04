@@ -1,6 +1,7 @@
 <script lang="ts">
     import { buyCard, shopCards } from "../../models/deck/Cards";
     import type { Deck } from "../../models/deck/Deck";
+    import { shopItems } from "../../models/items/Items";
     import type { Resources } from "../../models/items/resources";
     import LineCard from "../LineCard.svelte";
     import RodIcon from "../icons/RodIcon.svelte";
@@ -59,42 +60,59 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 mt-20 gap-4">
-                <div class="flex flex-col">
-                    <p class="text-center">Line Cards</p>
-                    <div class="flex flex-row gap-3">
-                        {#each shopCards as card}
-                            <div
-                                class="flex flex-col items-center hover:cursor-pointer"
-                                on:click={() => buyCard(card, resources, deck)}
-                            >
-                                <LineCard {card} />
-                                <div class="costIcon bg-blue-500">
-                                    {card.cost}
+            <div class="flex flex-col">
+                <div class="flex flex-row mt-20 gap-4">
+                    <div class="flex flex-col basis-3/4">
+                        <p class="text-center">Line Cards</p>
+                        <div class="flex flex-row gap-3">
+                            {#each shopCards as card}
+                                <div
+                                    class="flex flex-col items-center"
+                                    on:click={() =>
+                                        buyCard(card, resources, deck)}
+                                >
+                                    <LineCard {card} />
+                                    <div class="costIcon bg-blue-500 mt-1">
+                                        {card.cost}
+                                    </div>
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
+                    <div class="flex flex-col ml-8">
+                        <p class="text-center">Equipment</p>
+                        {#each shopItems as item}
+                            <div class="itemBox">
+                                <div
+                                    class="flex flex-col divide-y-2 divide-dashed"
+                                >
+                                    <div class="flex flex-row rounded-md py-1">
+                                        <div class="flex px-1">
+                                            <RodIcon />
+                                            <p class="font-bold">
+                                                : {item.maxTension}
+                                            </p>
+                                        </div>
+                                        <p class="ml-3">{item.name}</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-center px-2">
+                                            {item.text}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex items-center justify-center w-14"
+                                >
+                                    <p class="costIcon bg-yellow-500">
+                                        {item.cost}
+                                    </p>
                                 </div>
                             </div>
                         {/each}
                     </div>
                 </div>
-                <div class="flex flex-col ml-8">
-                    <p class="text-center">Equipment</p>
-                    <div
-                        class="flex flex-col border-2 border-black rounded-md divide-y-2 divide-dashed divide-gray-400"
-                    >
-                        <div class="flex flex-row items-center rounded-md py-1">
-                            <div class="flex px-1">
-                                <RodIcon />
-                                <p class="font-bold">: 5</p>
-                            </div>
-                            <p class="text-center">Good Rod</p>
-                        </div>
-                        <div>
-                            <p class="text-center">
-                                A more recent model of rod
-                            </p>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="flex flex-col">
                     <p class="text-center">Services</p>
                 </div>
@@ -125,10 +143,14 @@
     }
 
     .costIcon {
-        @apply font-bold text-white rounded-full flex items-center justify-center mt-1 w-8 h-8;
+        @apply font-bold text-white rounded-full flex items-center justify-center w-8 h-8;
     }
 
     .iconColumn {
         @apply flex justify-end;
+    }
+
+    .itemBox {
+        @apply flex flex-row border-2 border-black rounded-md divide-x-2 divide-dashed  mb-1 hover:cursor-pointer;
     }
 </style>
